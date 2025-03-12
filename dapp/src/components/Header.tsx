@@ -1,11 +1,15 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { ethers, JsonRpcSigner } from "ethers";
-import { useEffect, useState } from "react";
+import { JsonRpcSigner } from "ethers";
+import { ethers } from "ethers";
+import { Dispatch, SetStateAction } from "react";
 import { FaTree } from "react-icons/fa6";
 
-function Header() {
-  const [signer, setSigner] = useState<JsonRpcSigner | null>(null);
+interface HeaderProps {
+  signer: JsonRpcSigner | null;
+  setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
+}
 
+function Header({ signer, setSigner }: HeaderProps) {
   const connectWallet = async () => {
     try {
       if (!window.ethereum) {
