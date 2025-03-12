@@ -17,9 +17,7 @@ function CreateNFT({ treeNFTContract }: CreateNFTProps) {
     setIsLoading(true);
 
     try {
-      const tx = await treeNFTContract.mintNFT(
-        import.meta.env.VITE_METADATA_URL
-      );
+      const tx = await treeNFTContract.mintNFT();
 
       await tx.wait();
 
