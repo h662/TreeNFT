@@ -1,10 +1,15 @@
 import { Flex } from "@chakra-ui/react";
 import CreateNFT from "./CreateNFT";
+import { Contract } from "ethers";
 
-function Main() {
+interface MainProps {
+  treeNFTContract: Contract | null;
+}
+
+function Main({ treeNFTContract }: MainProps) {
   return (
-    <Flex as="main" bgColor="yellow.100">
-      <CreateNFT />
+    <Flex as="main" bgColor="yellow.100" p={4}>
+      <CreateNFT treeNFTContract={treeNFTContract} />
     </Flex>
   );
 }
