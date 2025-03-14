@@ -71,7 +71,7 @@ function App() {
         connectWallet={connectWallet}
         disconnectWallet={disconnectWallet}
       />
-      <Main treeNFTContract={treeNFTContract} />
+      <Main signer={signer} treeNFTContract={treeNFTContract} />
     </>
   );
 }

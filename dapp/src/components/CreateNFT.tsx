@@ -2,6 +2,7 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { Contract } from "ethers";
 import { useState } from "react";
 import SuccessDialog from "./SuccessDialog";
+import { containerStyle } from "./Main";
 
 interface CreateNFTProps {
   treeNFTContract: Contract | null;
@@ -31,15 +32,7 @@ function CreateNFT({ treeNFTContract }: CreateNFTProps) {
 
   return (
     <>
-      <Flex
-        maxW={1024}
-        mx="auto"
-        bgColor="purple.100"
-        flexDir="column"
-        flexGrow={1}
-        alignItems="center"
-        gap={2}
-      >
+      <Flex {...containerStyle}>
         <Text
           bgGradient="to-r"
           gradientFrom="green.200"
