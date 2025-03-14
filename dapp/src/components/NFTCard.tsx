@@ -1,4 +1,5 @@
 import { GridItem, Image } from "@chakra-ui/react";
+import { Contract } from "ethers";
 import { useEffect, useState } from "react";
 
 interface Metadata {
@@ -8,10 +9,12 @@ interface Metadata {
 }
 
 interface NFTCardProps {
+  tokenId: bigint;
   tokenURI: string;
+  treeNFTContract: Contract | null;
 }
 
-function NFTCard({ tokenURI }: NFTCardProps) {
+function NFTCard({ tokenId, tokenURI, treeNFTContract }: NFTCardProps) {
   const [metadata, setMetadata] = useState<Metadata | null>(null);
 
   const getMetadata = async () => {
@@ -25,11 +28,27 @@ function NFTCard({ tokenURI }: NFTCardProps) {
     }
   };
 
+  const getLastClaimTime = async () => {
+    if (!treeNFTContract || !tokenId) return;
+
+    try {
+      const res = await treeNFTContract.lastClaimTime(tokenId);
+
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (!tokenURI) return;
 
     getMetadata();
   }, [tokenURI]);
+
+  useEffect(() => {
+    getLastClaimTime();
+  }, [tokenId, treeNFTContract]);
 
   return (
     <GridItem as="li">
