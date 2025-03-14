@@ -1,30 +1,14 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { JsonRpcSigner } from "ethers";
-import { ethers } from "ethers";
-import { Dispatch, SetStateAction } from "react";
-import { FaTree } from "react-icons/fa6";
+import Logo from "./Logo";
 
 interface HeaderProps {
   signer: JsonRpcSigner | null;
-  setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
+  connectWallet: () => Promise<void>;
+  disconnectWallet: () => void;
 }
 
-function Header({ signer, setSigner }: HeaderProps) {
-  const connectWallet = async () => {
-    try {
-      if (!window.ethereum) {
-        alert("MetaMask가 설치되어 있지 않습니다.");
-        return;
-      }
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
-
-      setSigner(await provider.getSigner());
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+function Header({ signer, connectWallet, disconnectWallet }: HeaderProps) {
   return (
     <Box as="header" bgColor="blue.100" p={4}>
       <Flex
@@ -34,16 +18,7 @@ function Header({ signer, setSigner }: HeaderProps) {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Flex
-          fontSize="2xl"
-          fontWeight="semibold"
-          alignItems="center"
-          gap={2}
-          color="green.600"
-        >
-          <FaTree />
-          Tree NFT
-        </Flex>
+        <Logo />
         <Box>
           {signer ? (
             <Text
@@ -51,7 +26,7 @@ function Header({ signer, setSigner }: HeaderProps) {
               px={2}
               py={1}
               cursor="pointer"
-              onClick={() => setSigner(null)}
+              onClick={disconnectWallet}
             >
               {signer.address.substring(0, 7)}...
               {signer.address.substring(signer.address.length - 5)}
