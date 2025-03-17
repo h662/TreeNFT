@@ -100,6 +100,7 @@ function NFTList({ signer, treeNFTContract }: NFTListProps) {
               tokenId={myNFTs[i]}
               tokenURI={v}
               treeNFTContract={treeNFTContract}
+              isOpen={isOpen}
             />
           ))}
         </Grid>
