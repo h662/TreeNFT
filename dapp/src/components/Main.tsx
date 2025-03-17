@@ -7,7 +7,6 @@ import { JsonRpcSigner } from "ethers";
 export const containerStyle = {
   width: 1024,
   mx: "auto",
-  bgColor: "purple.100",
   flexDir: "column",
   flexGrow: 1,
   alignItems: "center",
@@ -21,7 +20,7 @@ interface MainProps {
 
 function Main({ signer, treeNFTContract }: MainProps) {
   return (
-    <Flex as="main" flexDirection="column" bgColor="yellow.100" p={4}>
+    <Flex as="main" flexDirection="column" p={4}>
       <CreateNFT treeNFTContract={treeNFTContract} />
       <NFTList signer={signer} treeNFTContract={treeNFTContract} />
     </Flex>
